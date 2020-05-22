@@ -1,4 +1,5 @@
 ## CPU Anatomy
+Ref - https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/ABasicComputer.gif/481px-ABasicComputer.gif)
 ## Contents
 - [Volume 1 Basic Architecture](#volume-1-basic-architecture)
