@@ -1,4 +1,4 @@
-## CPU ANATOMY
+## Micro CPU Anatomy
 ### Bus
 
 - The idea of a bus is simple, it lets you connect components to the computer's processor. 
