@@ -135,6 +135,11 @@ df -T     - file system type
 df -t/-x <file type>    - include/exclude specific file system type
 df -hT <directory>      - directory info
 
+ls -i
+stat
+find <> -inum 
+find <> -inum <delete/?>
+
 du -a -h <folder>  //disk usage free space
 
 sudo fdisk -l - HDD info
@@ -446,3 +451,6 @@ source ~/.bashrc
 conda init
 conda env list
 ```
+
+#### Linux Kernel Health
+![linux_observability_tools](https://user-images.githubusercontent.com/20130001/82738189-83f5ec80-9d53-11ea-8e92-990e0c8af6cd.png)
