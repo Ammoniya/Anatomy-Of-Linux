@@ -454,3 +454,14 @@ conda env list
 
 #### Linux Kernel Health
 ![linux_observability_tools](https://user-images.githubusercontent.com/20130001/82738189-83f5ec80-9d53-11ea-8e92-990e0c8af6cd.png)
+
+#### Detecting Virtualization
+```
+dmidecode -s system-product-name
+dmidecode -t system|grep 'Manufacturer\|Product'
+ls -1 /dev/disk/by-id/
+systemd-detect-virt
+virt-what
+lshw -class system
+/proc/cpuinfo 
+```
