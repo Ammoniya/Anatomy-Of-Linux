@@ -261,6 +261,7 @@ sudo more /sys/class/net/ethX/carrier 		- [0/1 - up/down]
 sudo more /sys/class/net/ethX/operstate		- []
 /etc/init.d/networking restart
 
+netstat -rn
 
 ip a					- view all interfaces 
 ip addr show				- view all interfaces 
