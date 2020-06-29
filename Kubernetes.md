@@ -37,7 +37,7 @@ sudo ufw reload
 ```
 sudo swapoff -a
 ```
-<h2> Install docker-ce </h2><img src="https://user-images.githubusercontent.com/20130001/86041084-c2717c00-ba62-11ea-9437-120d650c88d4.png " alt="drawing" width="200"/> <br>
+<h2> Install docker-ce </h2><img src="https://user-images.githubusercontent.com/20130001/86041084-c2717c00-ba62-11ea-9437-120d650c88d4.png " alt="drawing" width="200"/>
 
 #### Note do not install docker.io it's old
 
@@ -62,8 +62,7 @@ sudo systemctl start docker
 ```
 sudo usermod -aG docker sudo
 ```
-<h2> Install kubernetes </h2><img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png
-" alt="drawing" width="200"/> <br>
+<h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png" alt="drawing" width="200"/>
 
 #### Install kubernetes [kubelet kubeadm kubectl]
 ```
@@ -159,7 +158,7 @@ kubectl label node "node-host-name" node-role.kubernetes.io/worker=worker [node-
 ```
 kubeadm token create --print-join-command
 ```
-<h2> Install helm on the master </h2><img src="https://user-images.githubusercontent.com/20130001/86042862-6eb46200-ba65-11ea-9702-fbcb351b1060.png" alt="drawing" width="200"/> <br>
+<h2> Install helm on the master </h2><img src="https://user-images.githubusercontent.com/20130001/86042862-6eb46200-ba65-11ea-9702-fbcb351b1060.png" alt="drawing" width="200"/> 
 
 #### Install helm on the master
 ```
