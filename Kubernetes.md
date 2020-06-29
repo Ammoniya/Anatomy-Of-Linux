@@ -1,5 +1,6 @@
-# kubernetes
-![Kubernetes](https://user-images.githubusercontent.com/20130001/85931964-bad89880-b8e5-11ea-99a8-a9fadcec9883.png)
+<h1><b>Setup instructions</b></h1>
+
+<h2> Ubuntu configurarions </h2><img src="https://user-images.githubusercontent.com/20130001/86043076-c94dbe00-ba65-11ea-8794-2b8c8a922b34.png" alt="drawing" width="200" height="150"/> 
 
 #### Verify the MAC address and product_uuid are unique for every node
 ```
@@ -36,7 +37,10 @@ sudo ufw reload
 ```
 sudo swapoff -a
 ```
-#### Install docker-ce [note do not install docker.io its old]
+<h2> Install docker-ce </h2><img src="https://user-images.githubusercontent.com/20130001/86041084-c2717c00-ba62-11ea-9437-120d650c88d4.png " alt="drawing" width="200"/> <br>
+
+#### Note do not install docker.io it's old
+
 ```
 sudo apt-get update
 sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
@@ -58,6 +62,9 @@ sudo systemctl start docker
 ```
 sudo usermod -aG docker sudo
 ```
+<h2> Install kubernetes </h2><img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png
+" alt="drawing" width="200"/> <br>
+
 #### Install kubernetes [kubelet kubeadm kubectl]
 ```
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -105,13 +112,13 @@ NOTE - If kubeadm is used and you are planning to use coreos flannel  as your ne
 MAKE SURE TO - copy the join command that gives token and certificate to add workers 
 
 ```
-### Set kubectl to executable mode without sudo and point kubectl to the Kubernetes API server 
+#### Set kubectl to executable mode without sudo and point kubectl to the Kubernetes API server 
 ```
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 mkdir -p $HOME/.kube
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-### Install pod network
+#### Install pod network
 ```
 The flannel manifest defines four things:
 
@@ -152,8 +159,9 @@ kubectl label node "node-host-name" node-role.kubernetes.io/worker=worker [node-
 ```
 kubeadm token create --print-join-command
 ```
+<h2> Install helm on the master </h2><img src="https://user-images.githubusercontent.com/20130001/86042862-6eb46200-ba65-11ea-9702-fbcb351b1060.png" alt="drawing" width="200"/> <br>
 
-#### Install helm on master
+#### Install helm on the master
 ```
 Helm is a package manager for Kubernetes that allows developers and operators to more easily package,
 configure, and deploy applications and services onto Kubernetes clusters.
