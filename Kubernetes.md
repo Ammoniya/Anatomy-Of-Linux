@@ -37,7 +37,7 @@ sudo ufw reload
 ```
 sudo swapoff -a
 ```
-<h2> Install docker-ce </h2><img src="https://user-images.githubusercontent.com/20130001/86041084-c2717c00-ba62-11ea-9437-120d650c88d4.png " alt="drawing" width="200"/>
+<h2> Install docker-ce </h2> <img src="https://user-images.githubusercontent.com/20130001/86041084-c2717c00-ba62-11ea-9437-120d650c88d4.png " alt="drawing" width="200"/>
 
 #### Note do not install docker.io it's old
 
@@ -158,6 +158,121 @@ kubectl label node "node-host-name" node-role.kubernetes.io/worker=worker [node-
 ```
 kubeadm token create --print-join-command
 ```
+#### Dynamic provisioning with NFS
+##### Create clusterrole, clusterrolebinding, role and rolebinding
+```
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: nfs-client-provisioner
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nfs-client-provisioner-runner
+rules:
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "update", "patch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: run-nfs-client-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: nfs-client-provisioner
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: nfs-client-provisioner-runner
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: leader-locking-nfs-client-provisioner
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: leader-locking-nfs-client-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: nfs-client-provisioner
+    # replace with namespace where provisioner is deployed
+    namespace: default
+roleRef:
+  kind: Role
+  name: leader-locking-nfs-client-provisioner
+  apiGroup: rbac.authorization.k8s.io
+```
+save the file as rbac.yaml and run ``` kubectl create -f rbac.yaml ```
+##### Create custom NFS provisioner 
+```
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-client-provisioner
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: cgraph.com/nfs
+            - name: NFS_SERVER
+              value: 10.4.48.42
+            - name: NFS_PATH
+              value: /cyber-cgraph
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: 10.4.48.42
+            path: /cyber-cgraph
+```
+save the file as deployment.yaml and run ``` kubectl create -f deployment.yaml ```
+##### Create storage class
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: managed-nfs-storage
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: cgraph.com/nfs
+parameters:
+  archiveOnDelete: "false"
+```
+save the file as sclass.yaml and run ``` kubectl create -f sclass.yaml ```
 <h2> Install helm on the master </h2><img src="https://user-images.githubusercontent.com/20130001/86042862-6eb46200-ba65-11ea-9702-fbcb351b1060.png" alt="drawing" width="200"/> 
 
 #### Install helm on the master
