@@ -472,5 +472,8 @@ spec:
 
 kubectl apply -f ./cluster.yaml 
 kubectl describe greenplumClusters/NAME
+```
+Delete the cluster
+```
 kubectl delete -f ./cluster.yaml  --wait=false
 ```
