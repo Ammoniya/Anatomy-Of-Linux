@@ -33,3 +33,4 @@ spec:
     count: 5
   image: "arangodb/arangodb:3.6.4"
 ```
+
