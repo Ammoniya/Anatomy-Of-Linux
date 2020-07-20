@@ -1,68 +1,9 @@
-<h1><b>Setup instructions</b></h1>
+<h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png" alt="drawing" width="200"/>
 
-<h2> Ubuntu configurarions </h2><img src="https://user-images.githubusercontent.com/20130001/86043076-c94dbe00-ba65-11ea-8794-2b8c8a922b34.png" alt="drawing" width="200" height="150"/> 
-
-#### Verify the MAC address and product_uuid are unique for every node
-```
-ip link
-sudo cat /sys/class/dmi/id/product_uuid
-
-//if not bridge iptables
-
-sudo sysctl --system
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-EOF
-```
-#### If ubuntu firewall(ufw) is enabled 
-```
-sudo ufw status
-sudo ufw status verbose
-
-//if ufw enables 
-
-sudo ufw allow 6443/tcp
-sudo ufw allow 2379/tcp
-sudo ufw allow 2380/tcp
-sudo ufw allow 10250/tcp
-sudo ufw allow 10251/tcp
-sudo ufw allow 10252/tcp
-sudo ufw allow 10255/tcp
-sudo ufw allow 10251/tcp
-sudo ufw allow 10255/tcp
-sudo ufw reload
-```
 #### disable swap
 ```
 sudo swapoff -a
 ```
-<h2> Install docker-ce </h2> <img src="https://user-images.githubusercontent.com/20130001/86041084-c2717c00-ba62-11ea-9437-120d650c88d4.png " alt="drawing" width="200"/>
-
-#### Note do not install docker.io it's old
-
-```
-sudo apt-get update
-sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update
-sudo apt-get install docker-ce
-```
-#### Check docker is up and running 
-```
-docker -v
-sudo systemctl status docker 
-
-//if it's not up and running 
-sudo systemctl enable docker
-sudo systemctl start docker
-```
-#### Add docker to sudo [optional]
-```
-sudo usermod -aG docker sudo
-```
-<h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png" alt="drawing" width="200"/>
 
 #### Install kubernetes [kubelet kubeadm kubectl]
 ```
