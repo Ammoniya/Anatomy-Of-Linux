@@ -1,6 +1,6 @@
 <h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png" alt="drawing" width="200"/>
 
-#### disable swap
+#### Disable swap
 ```
 sudo swapoff -a
 ```
