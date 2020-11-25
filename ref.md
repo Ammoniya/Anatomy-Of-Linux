@@ -1146,8 +1146,7 @@ Spring Boot provides built-in starters which makes development easier and rapid.
 * Controller - REST operations 
 
 ## Javascript 
-ow es6 concepts ahai
-
+es6
 Arrow function anam manm
 callback hell
 ## NodeJs
