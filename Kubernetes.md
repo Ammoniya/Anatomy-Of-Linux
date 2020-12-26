@@ -1,5 +1,6 @@
 <h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png" alt="drawing" width="200"/>
 
+## Installation
 #### Disable swap
 ```
 sudo swapoff -a
@@ -44,13 +45,6 @@ systemctl restart kubelet
 #### Start kubernetes master 
 ```
 sudo kubeadm init --pod-network-cidr=*.*.*.* [Ex- 10.244.0.0/16]
-
-NOTE - If kubeadm is used and you are planning to use coreos flannel  as your network,
- then pass --pod-network-cidr=10.244.0.0/16
- to kubeadm init to ensure that the podCIDR is set
-
-MAKE SURE TO - copy the join command that gives token and certificate to add workers 
-
 ```
 #### Set kubectl to executable mode without sudo and point kubectl to the Kubernetes API server 
 ```
@@ -60,20 +54,6 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 #### Install pod network
 ```
-The flannel manifest defines four things:
-
-1. A ClusterRole and ClusterRoleBinding for role-based access control (RBAC).
-2. A service accounts for flannel to use.
-3. A ConfigMap containing both a CNI configuration and a flannel configuration. 
-The network in the flannel configuration should match the pod network CIDR.
- The choice of backend is also made here and defaults to VXLAN.
-4. A DaemonSet to deploy the flannel pod on each Node.
- The pod has two containers
-       1) the flannel daemon itself, and 
-       2) an initContainer for deploying the CNI configuration to a location that the kubelet can read.
-
-
-INSTALL: 
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 #### Check pod network is up and running
@@ -280,46 +260,6 @@ kubectl apply -f ./dir                         # create resource(s) in all manif
 kubectl apply -f https://git.io/vPieo          # create resource(s) from url
 kubectl create deployment nginx --image=nginx  # start a single instance of nginx
 kubectl explain pods                           # get the documentation for pod manifests
-
-# Create multiple YAML objects from stdin
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Pod
-metadata:
-  name: busybox-sleep
-spec:
-  containers:
-  - name: busybox
-    image: busybox
-    args:
-    - sleep
-    - "1000000"
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: busybox-sleep-less
-spec:
-  containers:
-  - name: busybox
-    image: busybox
-    args:
-    - sleep
-    - "1000"
-EOF
-
-# Create a secret with several keys
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysecret
-type: Opaque
-data:
-  password: $(echo -n "s33msi4" | base64 -w0)
-  username: $(echo -n "jane" | base64 -w0)
-EOF
-
 ```
 #### Viewing, Finding Resources
 ```
@@ -389,15 +329,15 @@ kubectl diff -f ./my-manifest.yaml
 ```
 #### Updating Resources
 ```
-kubectl set image deployment/frontend www=image:v2               # Rolling update "www" containers of "frontend" deployment, updating the image
-kubectl rollout history deployment/frontend                      # Check the history of deployments including the revision 
-kubectl rollout undo deployment/frontend                         # Rollback to the previous deployment
-kubectl rollout undo deployment/frontend --to-revision=2         # Rollback to a specific revision
-kubectl rollout status -w deployment/frontend                    # Watch rolling update status of "frontend" deployment until completion
-kubectl rollout restart deployment/frontend                      # Rolling restart of the "frontend" deployment
+kubectl set image deployment/frontend www=image:v2     # Rolling update "www" containers of "frontend" deployment, updating the image
+kubectl rollout history deployment/frontend            # Check the history of deployments including the revision 
+kubectl rollout undo deployment/frontend               # Rollback to the previous deployment
+kubectl rollout undo deployment/frontend --to-revision=2  # Rollback to a specific revision
+kubectl rollout status -w deployment/frontend          # Watch rolling update status of "frontend" deployment until completion
+kubectl rollout restart deployment/frontend            # Rolling restart of the "frontend" deployment
 
 
-cat pod.json | kubectl replace -f -                              # Replace a pod based on the JSON passed into std
+cat pod.json | kubectl replace -f -                     # Replace a pod based on the JSON passed into std
 
 # Force replace, delete and then re-create the resource. Will cause a service outage.
 kubectl replace --force -f ./pod.json
