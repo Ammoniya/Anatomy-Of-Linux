@@ -1,4 +1,4 @@
-<h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/86042532-ed5ccf80-ba64-11ea-9e0e-2b844cbc0d00.png" alt="drawing" width="200"/>
+<h2> Install kubernetes </h2> <img src="https://user-images.githubusercontent.com/20130001/103370676-66f87780-4af3-11eb-8843-4e4235bdf313.png" alt="drawing" width="200"/>
 
 ## Installation
 #### Disable swap
@@ -727,8 +727,6 @@ kubectl api-resources --api-group=extensions
 | List all CRD                            | kubectl get crd             |
 | List storageclass                       | kubectl get storageclass    |
 ```
-
-<h2> Install helm on the master </h2><img src="https://user-images.githubusercontent.com/20130001/86042862-6eb46200-ba65-11ea-9702-fbcb351b1060.png" alt="drawing" width="200"/> 
 
 #### Install helm on the master
 ```
