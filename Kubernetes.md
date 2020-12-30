@@ -2,6 +2,7 @@
 
 ## Installation
 #### Disable swap
+
 ```
 sudo swapoff -a
 ```
