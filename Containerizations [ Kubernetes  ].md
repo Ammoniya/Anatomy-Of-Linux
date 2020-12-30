@@ -686,15 +686,15 @@ kubectl api-resources --api-group=extensions
 #### Namespace & Security
 
 ```
-| Name                          | Command                                                                                           |
-|-------------------------------+---------------------------------------------------------------------------------------------------|
-| List authenticated contexts   | kubectl config get-contexts=, =~/.kube/config                                                     |
-| Set namespace preference      | kubectl config set-context <context_name> --namespace=<ns_name>                                   |
-| Switch context                | kubectl config use-context <cluster-name>                                                         |
-| Load context from config file | kubectl get cs --kubeconfig kube_config.yml                                                       |
-| Delete the specified context  | kubectl config delete-context <cluster-name>                                                      |
-| List all namespaces defined   | kubectl get namespaces                                                                            |
-| List certificates             | kubectl get csr                                                                                   |
+| Name                          | Command                                                                   |
+|-------------------------------+---------------------------------------------------------------------------|
+| List authenticated contexts   | kubectl config get-contexts=, =~/.kube/config                             |
+| Set namespace preference      | kubectl config set-context <context_name> --namespace=<ns_name>           |
+| Switch context                | kubectl config use-context <cluster-name>                                 |
+| Load context from config file | kubectl get cs --kubeconfig kube_config.yml                               |
+| Delete the specified context  | kubectl config delete-context <cluster-name>                              |
+| List all namespaces defined   | kubectl get namespaces                                                    |
+
 ```
 
 #### Network
