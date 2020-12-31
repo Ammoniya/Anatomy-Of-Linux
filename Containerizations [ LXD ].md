@@ -1,6 +1,5 @@
 # Useful LXD commands
-Summarized from https://stgraber.org/2016/03/19/lxd-2-0-your-first-lxd-container-312/. 
-
+ 
 Interestingly, the LXD command line client is named.... `lxc`! 
 
 ### List available containers
