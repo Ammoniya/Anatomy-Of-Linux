@@ -1,7 +1,7 @@
 ## Linux
 #### file hierarchy
 ![standard-unix-filesystem-hierarchy](https://user-images.githubusercontent.com/20130001/61242287-f3c63e80-a762-11e9-8c45-8446392fbe99.png)
-#### create user
+* create user
 ```
 sudo adduser <user name>
 sudo passwd <user name>
@@ -10,7 +10,7 @@ sudo groupadd <user group name>
 
 sudo usermod -aG <user group> newuser [Ex-sudo]
 ```
-#### file navigation
+* file navigation
 ```
 cd
 ls , ls -a , ls -A, ls -l, ls -a -l, ls -A -l ,ls -a -l --color
@@ -22,7 +22,7 @@ history
 history -c
 history -d <line number>
 ```
-#### file manipulation
+* file manipulation
 ```
 view - more, less, head, tail, cat
 edit - vim, nano, gedit
@@ -32,7 +32,7 @@ create empty - touch
 &  - left run on background
 ```
 
-#### services
+* services
 ```
 service --status-all
 	+ running
@@ -48,7 +48,7 @@ systemctl list-unit-files
 
 systemctl start/stop/restart/reload/status <service name>
 ```
-#### explore services and process running on ports
+* explore services and process running on ports
 ```
 *view services and ports
 netstat -a		Everyting 
@@ -62,7 +62,7 @@ sudo lsof -i :<port number>     more details in NAME
 sudo lsof -n -i :<port number>	less details in NAME
 sudo lsof -t -i :<port number>	view only por numbers
 ```
-#### process
+* process
 ```
 top 
 htop ( sudo apt-get install htop)
@@ -114,7 +114,7 @@ killall <process name>
 
 cTrl + D (throw to background)
 ```
-#### file system
+* file system
 ```
 * hard link
 ln <source> <link>
@@ -168,14 +168,14 @@ file -c </dev/sda*>
 file -c <file name>
 
 ```
-#### searching things
+* searching things
 ```
 whereis - binary, source code, man page
 which   - binary
 locate  - 
 find    -
 ```
-#### utilities 
+* utilities 
 ```
 grep <reg expression> (sudo ps -le | grep apache2)
 grep -i <reg expression> ~ force grep to ignore word case in regX
@@ -195,7 +195,7 @@ tar -xvzf <*.tar.gz>
 apt-get install/update/upgrade/remove/list/search <pkg from repo>
 add-apt-repository ppa:<pkg>/ppa
 ```
-#### permissions and security
+* permissions and security
 ```
 whoami 
 
@@ -218,7 +218,7 @@ w - who logged in
 w <user name>
 
 ```
-#### config
+* config
 ```
 /etc/environment - environment variable
 ~/.profile - set path etc
@@ -226,7 +226,7 @@ w <user name>
 source active ~/.bashrc or ~/.profile
 ```
 
-### env
+* env
 ```
 printenv - view environment variables
 ```
@@ -237,14 +237,14 @@ printenv - view environment variables
 * HOME – your home directory.
 * MAIL – the location of the user's mail spool.
 
-#### pci-bus information 
+* pci-bus information 
 ```
 lspci - default
 lspci -v  - info
 lspci -vv - more info
 lspci -t - tree output
 ```
-#### network troubleshooting
+* network troubleshooting
 note :- *ethX* interpret the network interface<br>
 view network interface naming conventions 
 Two character prefixes based on the type of interface<br>
@@ -329,7 +329,7 @@ ping -c <int> <ip>
 #### Linux Kernel Health
 ![linux_observability_tools](https://user-images.githubusercontent.com/20130001/82738189-83f5ec80-9d53-11ea-8e92-990e0c8af6cd.png)
 
-#### Detecting Virtualization
+* Detecting Virtualization
 ```
 dmidecode -s system-product-name
 dmidecode -t system|grep 'Manufacturer\|Product'
@@ -340,7 +340,7 @@ lshw -class system
 /proc/cpuinfo 
 ```
 
-#### Boot
+## Boot
 ---
 
 * 6 Levels to booting
@@ -1029,10 +1029,7 @@ File System
 		0 = All access denied
 		First number is for the owner, second for the group, and third for everyon
 
-		http://permissions-calculator.org/
-
-		![alt text](permissions.jpg "Permissions")
-
+		
 * Permissions On Folders
 
 		r: read only the names of the files in the directory
